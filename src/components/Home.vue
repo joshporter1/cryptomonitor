@@ -3,6 +3,7 @@
     <v-layout row wrap>
       <v-flex xs12 v-for="currency in currencies" :key="currency.id">
         <v-card ripple hover>
+          <v-card-title>{{currency.name}}</v-card-title>
           <v-card-text>{{currency}}</v-card-text>
         </v-card>
       </v-flex>

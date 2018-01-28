@@ -1,9 +1,8 @@
 <template>
   <div>
     <v-app :dark="darkTheme">
-      <v-navigation-drawer absolute v-model="drawer">
+      <v-navigation-drawer app fixed v-model="drawer">
         <v-toolbar flat>
-          <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
           <v-list>
             <v-list-tile>
               <v-list-tile-title class="title">
