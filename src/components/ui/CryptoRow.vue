@@ -1,9 +1,26 @@
 <template>
   <v-flex xs12>
     <v-card ripple hover>
-      <Sparkline style="height: 100px;" :data="chartData" :options="chartOptions" />
-      <v-card-title>{{currency.name}}</v-card-title>
-      <v-card-text>{{currency}}</v-card-text>
+      <Sparkline style="height: 100px;" :data="chartData" />
+      <v-container fill-height fluid style="position: absolute; top:0; right: 0; left:0;">
+        <v-layout fill-height>
+          <v-flex xs6 align-end flexbox>
+            <span class="headline">{{currency.name}}</span>
+            <span class="subheading">{{currency.symbol}}</span>
+          </v-flex>
+          <v-flex xs6 align-end flexbox class="text-xs-right">
+            <p>
+              <span class="title">${{currency.price_usd}}</span><br>
+              <span class="body-2">
+                {{currency.price_btc}} <small>BTC</small><br>
+              </span>
+              <span class="body-2">
+                {{currency.percent_change_24h}}% <small>24h</small><br>
+              </span>
+            </p>
+          </v-flex>
+        </v-layout>
+      </v-container>
     </v-card>
   </v-flex>
 </template>
@@ -19,54 +36,30 @@ export default {
     cryptoHistory () {
       return this.$store.state.histoHour[this.currency.symbol]
     },
-    chartOptions () {
-      // return {
-      //   scaleLineColor: 'rgba(0,0,0,0)',
-      //   scaleShowLabels: false,
-      //   scaleShowGridLines: false,
-      //   pointDot: false,
-      //   datasetFill: false,
-      //   // Sadly if you set scaleFontSize to 0, chartjs crashes
-      //   // Instead we'll set it as small as possible and make it transparent
-      //   scaleFontSize: 1,
-      //   scaleFontColor: 'rgba(0,0,0,0)',
-      // }
-      return {
-        maintainAspectRatio: false,
-        responsive: true,
-        scales: {
-          xAxes: [{
-            display: false
-          }],
-          yAxes: [{
-            display: false
-          }]
-        },
-        legend: {
-          display: false
-        },
-        tooltip: {
-          enabled: false
-        },
-        elements: {
-          point: {
-            radius: 0
-          }
-        }
+    seriesColor () {
+      if (this.currency.percent_change_24h < 0) {
+        return '#ffb5b5'
+      } else {
+        return '#ccffd2'
       }
     },
     chartData () {
-      var vals = this.cryptoHistory.map(function (row) { return row.close })
-      var labels = this.cryptoHistory.map(function (row) { return row.time })
-      return {
-        labels: labels,
-        datasets: [
-          {
-            label: 'GitHub Commits',
-            backgroundColor: '#f87979',
-            data: vals
-          }
-        ]
+      var vals = []
+      var labels = []
+      if (this.cryptoHistory) {
+        vals = this.cryptoHistory.map(function (row) { return row.close })
+        labels = this.cryptoHistory.map(function (row) { return row.time })
+        return {
+          labels: labels,
+          datasets: [
+            {
+              backgroundColor: this.seriesColor,
+              data: vals
+            }
+          ]
+        }
+      } else {
+        return false
       }
     }
   }
