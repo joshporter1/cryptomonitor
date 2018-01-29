@@ -1,7 +1,7 @@
 <template>
   <v-flex xs12>
     <v-card ripple hover>
-      <Sparkline style="height: 100px;" :data="chartData" />
+      <Sparkline style="height: 100px; opacity: 0.75;" :data="chartData" />
       <v-container fill-height fluid style="position: absolute; top:0; right: 0; left:0;">
         <v-layout fill-height>
           <v-flex xs6 align-end flexbox>
@@ -10,7 +10,7 @@
           </v-flex>
           <v-flex xs6 align-end flexbox class="text-xs-right">
             <p>
-              <span class="title">${{currency.price_usd}}</span><br>
+              <span class="headline">${{currency.price_usd}}</span><br>
               <span class="body-2">
                 {{currency.price_btc}} <small>BTC</small><br>
               </span>

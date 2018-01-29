@@ -36,8 +36,8 @@ export default {
     this.renderChart(this.data, this.options)
   },
   watch: {
-    data (oldData, newData) {
-      if (oldData !== newData) {
+    data (newData, oldData) {
+      if (oldData === false) {
         this.renderChart(this.data, this.options)
       }
     }
