@@ -1,19 +1,18 @@
 <template>
   <v-container fluid grid-list-sm>
     <v-layout row wrap>
-      <v-flex xs12 v-for="currency in currencies" :key="currency.id">
-        <v-card ripple hover>
-          <v-card-title>{{currency.name}}</v-card-title>
-          <v-card-text>{{currency}}</v-card-text>
-        </v-card>
-      </v-flex>
+      <CryptoRow v-for="currency in currencies" :key="currency.id" :currency="currency">
+      </CryptoRow>
     </v-layout>
   </v-container>
 </template>
 
 <script>
+import CryptoRow from '@/components/ui/CryptoRow'
+
 export default {
   name: 'Home',
+  components: { CryptoRow },
   computed: {
     currencies () {
       return this.$store.state.prices

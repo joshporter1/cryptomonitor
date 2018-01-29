@@ -20,7 +20,8 @@ export default new Vuex.Store({
       state.prices = prices
     },
     setHistoHour (state, data) {
-      state.histoHour[data.sym] = data.history
+      Vue.set(state.histoHour, data.sym, data.history)
+      // state.histoHour[data.sym] = data.history
     }
   },
   actions: {
@@ -34,7 +35,9 @@ export default new Vuex.Store({
     },
     getHistory (context, symbol) {
       Vue.http.get(CC_HISTOHOUR_URL + symbol).then((response) => {
-        var data = {history: response.body.Data, sym: symbol}
+        var data = {
+          history: response.body.Data,
+          sym: symbol}
         context.commit('setHistoHour', data)
       })
     }
