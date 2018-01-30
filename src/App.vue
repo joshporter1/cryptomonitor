@@ -68,7 +68,7 @@ export default {
         _this.$store.dispatch('getPrices', 20)
         _this.$store.dispatch('getPrices', 30)
         _this.$store.dispatch('getPrices', 40)
-      }, 2000)
+      }, 5000)
     },
     toggleDarkTheme () {
       this.$store.commit('toggleDarkTheme')

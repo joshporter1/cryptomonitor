@@ -43,7 +43,7 @@ export default new Vuex.Store({
           setTimeout(function () {
             console.log('Retrying...', symbol)
             context.dispatch('getHistory', symbol)
-          }, 5000, symbol)
+          }, 1000, symbol)
         } else {
           var data = {
             history: response.body.Data,
