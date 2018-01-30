@@ -61,7 +61,14 @@ export default {
   },
   methods: {
     getPrices () {
-      this.$store.dispatch('getPrices')
+      let _this = this
+      this.$store.dispatch('getPrices', 0)
+      setTimeout(function () {
+        _this.$store.dispatch('getPrices', 10)
+        _this.$store.dispatch('getPrices', 20)
+        _this.$store.dispatch('getPrices', 30)
+        _this.$store.dispatch('getPrices', 40)
+      }, 2000)
     },
     toggleDarkTheme () {
       this.$store.commit('toggleDarkTheme')
