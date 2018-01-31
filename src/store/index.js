@@ -12,6 +12,15 @@ export default new Vuex.Store({
     prices: [],
     histoHour: {}
   },
+  getters: {
+    sortedPrices (state) {
+      return state.prices.sort(function (a, b) {
+        if (parseInt(a.rank) < parseInt(b.rank)) return -1
+        if (parseInt(a.rank) > parseInt(b.rank)) return 1
+        return 0
+      })
+    }
+  },
   mutations: {
     toggleDarkTheme (state) {
       state.darkTheme = !state.darkTheme

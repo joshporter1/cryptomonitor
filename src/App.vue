@@ -65,9 +65,9 @@ export default {
       this.$store.dispatch('getPrices', 0)
       setTimeout(function () {
         _this.$store.dispatch('getPrices', 10)
+      }, 5000)
+      setTimeout(function () {
         _this.$store.dispatch('getPrices', 20)
-        _this.$store.dispatch('getPrices', 30)
-        _this.$store.dispatch('getPrices', 40)
       }, 5000)
     },
     toggleDarkTheme () {

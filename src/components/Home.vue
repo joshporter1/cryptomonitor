@@ -15,7 +15,7 @@ export default {
   components: { CryptoRow },
   computed: {
     currencies () {
-      return this.$store.state.prices
+      return this.$store.getters.sortedPrices
     }
   }
 }
